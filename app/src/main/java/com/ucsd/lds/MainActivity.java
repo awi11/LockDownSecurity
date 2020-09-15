@@ -25,18 +25,22 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Auth object
         mAuth = FirebaseAuth.getInstance();
     }
+
+     /**
+      * Checks if user is signed in (non-null) and update UI accordingly.
+      * Get the current Firebase user and store it on currentUser
+      * if currentUser is null then open the activity HomePage
+      *
+      *  Code from Tools->Firebase->Authentication-> (3)
+      *  "Check current auth state"
+      */
     @Override
     public void onStart() {
         super.onStart();
-        /* Check if user is signed in (non-null) and update UI accordingly.
-           Get the current Firebase user and store it on currentUser
-           if currentUser is null then open the activity HomePage
-         */
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if(currentUser == null){
             Intent homePageIntent = new Intent(MainActivity.this,HomePage.class);
             startActivity(homePageIntent);

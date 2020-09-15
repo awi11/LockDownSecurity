@@ -7,6 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ *  This class is the first thing a user will see if he is not logged in
+ *  MainActivity class will be responsible for checking if someone is logged in
+ *  This class then will ask if a user wants to log in or signup
+ *  Two Buttons will appear for users to choose.
+ */
+
 public class HomePage extends AppCompatActivity {
 
     private Button goToLogin;
