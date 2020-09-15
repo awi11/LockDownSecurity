@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "847871707776",
+    "firebase_url": "https://lockdown-7aea6.firebaseio.com",
+    "project_id": "lockdown-7aea6",
+    "storage_bucket": "lockdown-7aea6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847871707776:android:5ce71ed29aa7f31d787465",
+        "android_client_info": {
+          "package_name": "com.ucsd.lds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847871707776-6k596su4ifman0rfv83p16k8tb1vmetj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ucsd.lds",
+            "certificate_hash": "543981800ef977f120fbf0bc85e539f88ac8c5ca"
+          }
+        },
+        {
+          "client_id": "847871707776-rvke5nf0vssvdnnds5c7946br7q1uqc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKGMzc53JhVR0cg7y5GJKzy8r4ON0z0xU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847871707776-rvke5nf0vssvdnnds5c7946br7q1uqc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
