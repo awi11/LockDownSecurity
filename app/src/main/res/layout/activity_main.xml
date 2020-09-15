@@ -33,13 +33,56 @@
 <!--        app:navGraph="@navigation/mobile_navigation" />-->
 
     <ImageView
-        android:layout_width="561dp"
-        android:layout_height="699dp"
+        android:layout_width="179dp"
+        android:layout_height="160dp"
         android:layout_gravity="center"
         android:src="@drawable/splash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/chatButton"
+        android:layout_width="274dp"
+        android:layout_height="51dp"
+        android:backgroundTint="#3600A6"
+        android:text="Chat"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.417" />
+
+    <Button
+        android:id="@+id/Option2"
+        android:layout_width="274dp"
+        android:layout_height="51dp"
+        android:backgroundTint="#3600A6"
+        android:text="FEATURE 2"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatButton"
+        app:layout_constraintVertical_bias="0.063" />
+
+    <Button
+        android:id="@+id/option"
+        android:layout_width="274dp"
+        android:layout_height="51dp"
+        android:backgroundTint="#3600A6"
+        android:text="FEATURE 3"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Option2"
+        app:layout_constraintVertical_bias="0.09" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
