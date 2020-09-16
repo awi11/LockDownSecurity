@@ -3,8 +3,10 @@ package com.ucsd.lds;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.SingleLineTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,11 +39,27 @@ public class SignUp extends AppCompatActivity {
     // Declare a Firebase variable
     private FirebaseAuth mAuth;
 
+    // declare toolbar
+    private Toolbar mToolbar;
+
+    // declare progress dialog
+    private ProgressDialog mProgress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        //Toolbar set
+        mToolbar = findViewById(R.id.register_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Progress Dialog set
+        mProgress = new ProgressDialog(this);
+
 
         // Now we assign an instance to the Firebase variable this will initialize FireBase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -62,8 +81,23 @@ public class SignUp extends AppCompatActivity {
                 String username = eUsername.getText().toString();
                 String email_address = eEmailAdd.getText().toString();
                 String password = ePassword.getText().toString();
-                
-                registerUser(username,email_address,password);
+
+                //registerUser(username,email_address,password);
+
+
+                //Check if the strings are not empty if they are not then proceed
+                if( !( TextUtils.isEmpty(username) || TextUtils.isEmpty(email_address)|| TextUtils.isEmpty(password))){
+
+                    /** mProgress are just responsible for the message that's going to show up
+                     * while firebase is authenticating the fields and verifying it on the backend
+                     * (This is the loading bar you see when you hit login)
+                     */
+                    mProgress.setTitle("Registering User");
+                    mProgress.setMessage("Creating account");
+                    mProgress.setCanceledOnTouchOutside(false);
+                    mProgress.show();
+                    registerUser(username,email_address,password);
+                }
             }
         });
     }
@@ -90,14 +124,17 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    // FirebaseUser user = mAuth.getCurrentUser();
-                    //updateUI(user);
+
+                    mProgress.dismiss();
+                    Toast.makeText(SignUp.this, "Sign up succesful", Toast.LENGTH_LONG).show();
                     Intent mainActivity = new Intent(SignUp.this, MainActivity.class);
                     startActivity(mainActivity);
                     finish();
 
                 } else {
-                    Toast.makeText(SignUp.this, "Got Problems", Toast.LENGTH_LONG).show();
+
+                    mProgress.hide();
+                    Toast.makeText(SignUp.this, "Unable to sign up", Toast.LENGTH_LONG).show();
                 }
             }
         });

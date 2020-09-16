@@ -8,6 +8,14 @@
     tools:context=".SignUp">
 
 
+    <include
+        android:id="@+id/register_toolbar"
+        layout="@layout/app_bar_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <EditText
         android:id="@+id/et_name"
         android:layout_width="395dp"
@@ -16,7 +24,7 @@
         android:hint="Username"
         android:inputType="textPersonName"
         android:textColor="#ECE4E4"
-        android:textColorHint="#F7F3F3"
+        android:textColorHint="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,16 +67,29 @@
 
     <Button
         android:id="@+id/signupbutts"
-        android:layout_width="192dp"
-        android:layout_height="53dp"
+        android:layout_width="171dp"
+        android:layout_height="44dp"
         android:text="Register"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_password"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.071" />
+
+    <TextView
+        android:id="@+id/tv_create_acc_"
+        android:layout_width="312dp"
+        android:layout_height="43dp"
+        android:text="Create a new account"
+        android:textColor="#FFFFFF"
+        android:textSize="27sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

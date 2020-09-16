@@ -5,26 +5,31 @@
     android:id="@+id/goToSignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#323232"
     tools:context=".HomePage">
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="323dp"
-        android:layout_height="94dp"
-        android:text="Welcome to the Homepage"
-        android:textSize="24sp"
+        android:layout_width="294dp"
+        android:layout_height="74dp"
+        android:text="Welcome to LDS"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#F1EFF3"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.244" />
+        app:layout_constraintVertical_bias="0.238" />
 
     <Button
         android:id="@+id/goToLoginButton"
-        android:layout_width="120dp"
-        android:layout_height="46dp"
-        android:text="Login"
+        android:layout_width="280dp"
+        android:layout_height="51dp"
+        android:text="ALREADY HAVE AN ACCOUNT"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -34,13 +39,15 @@
 
     <Button
         android:id="@+id/goToSignUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register Now"
+        android:layout_width="283dp"
+        android:layout_height="53dp"
+        android:text="CREATE AN ACCOUNT"
+        android:textColor="#000000"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToLoginButton"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.071" />
 </androidx.constraintlayout.widget.ConstraintLayout>
