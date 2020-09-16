@@ -3,6 +3,11 @@ package com.ucsd.lds;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
+//import android.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private Toolbar mainToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth object
         mAuth = FirebaseAuth.getInstance();
+
+        //set tool bar
+        mainToolbar =findViewById(R.id.main_appbar_toolbar);
+        setSupportActionBar(mainToolbar);
+        getSupportActionBar().setTitle("LockDownSecurity");
+
+
     }
 
      /**
@@ -42,10 +55,36 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
-            Intent homePageIntent = new Intent(MainActivity.this,HomePage.class);
-            startActivity(homePageIntent);
-            finish();
+            sendToStart();
         }
     }
 
+    private void sendToStart() {
+            Intent homePageIntent = new Intent(MainActivity.this,HomePage.class);
+            startActivity(homePageIntent);
+            finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.logout_button){
+            FirebaseAuth.getInstance().signOut();
+            sendToStart();
+        }
+
+        return true;
+    }
 }
