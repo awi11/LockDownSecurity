@@ -23,14 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run(){
-                Intent intent = new Intent(MainActivity.this,LogIn.class);
-                startActivity(intent);
-                finish();
-            }
-        },SPLASH_SCREEN);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run(){
+//                Intent intent = new Intent(MainActivity.this,LogIn.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        },SPLASH_SCREEN);
+        startActivity(new Intent(MainActivity.this, MessagingActivity.class ));
 
 //        BottomNavigationView navView = findViewById(R.id.nav_view);
 //        // Passing each menu ID as a set of Ids because each
