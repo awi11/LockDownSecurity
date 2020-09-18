@@ -21,6 +21,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.ucsd.lds.Model.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class is responsible for registering a new user
@@ -29,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
  */
 
 public class SignUp extends AppCompatActivity {
+
 
     // declare the fields we need
     private EditText eUsername;
@@ -44,6 +51,10 @@ public class SignUp extends AppCompatActivity {
 
     // declare progress dialog
     private ProgressDialog mProgress;
+
+    //declare Colletion
+    CollectionReference users;
+
 
 
     @Override
@@ -69,6 +80,10 @@ public class SignUp extends AppCompatActivity {
         eEmailAdd = findViewById(R.id.et_email);
         ePassword = findViewById(R.id.et_password);
         signUpButt = findViewById(R.id.signupbutts);
+
+        users = FirebaseFirestore.getInstance()
+                .collection("Users");
+
 
         /* When sign up button is click collect the input from the EditText and save it as
          * Strings. Then pass in the strings to the method "registerUser"
@@ -124,6 +139,16 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                    User user = new User(username,currentUser.getUid(),email);
+
+
+                    Map<String, String> newUser = new HashMap<>();;
+                    newUser.put("name", user.getName());
+                    newUser.put("uid", user.getUid());
+                    newUser.put("email",user.getEmail());
+                    users.add(newUser);
 
                     mProgress.dismiss();
                     Toast.makeText(SignUp.this, "Sign up succesful", Toast.LENGTH_LONG).show();
