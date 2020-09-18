@@ -128,6 +128,7 @@ public class SignUp extends AppCompatActivity {
                     mProgress.dismiss();
                     Toast.makeText(SignUp.this, "Sign up succesful", Toast.LENGTH_LONG).show();
                     Intent mainActivity = new Intent(SignUp.this, MainActivity.class);
+                    mainActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(mainActivity);
                     finish();
 
