@@ -2,27 +2,24 @@ package com.ucsd.lds;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
-//import android.widget.Toolbar;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+//import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Toolbar mainToolbar;
+    private Button messageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +32,14 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //set tool bar
-        mainToolbar =findViewById(R.id.main_appbar_toolbar);
+        mainToolbar = findViewById(R.id.main_appbar_toolbar);
         setSupportActionBar(mainToolbar);
         getSupportActionBar().setTitle("LockDownSecurity");
+
+        // set chat button
+        messageBtn = (Button)findViewById(R.id.chatButton);
+        messageBtn.setOnClickListener(view -> startActivity
+                (new Intent(MainActivity.this, MessagingActivity.class)));
     }
 
      /**
@@ -82,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
         }
-
         return true;
     }
 }
