@@ -3,8 +3,15 @@ package com.ucsd.lds;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
+//import android.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -14,7 +21,8 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN = 3000;
+    private FirebaseAuth mAuth;
+    private Toolbar mainToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,29 +31,58 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run(){
-//                Intent intent = new Intent(MainActivity.this,LogIn.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        },SPLASH_SCREEN);
-        startActivity(new Intent(MainActivity.this, MessagingActivity.class ));
+        // Initialize Firebase Auth object
+        mAuth = FirebaseAuth.getInstance();
 
-//        BottomNavigationView navView = findViewById(R.id.nav_view);
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-//                .build();
-//
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
-
-
-
+        //set tool bar
+        mainToolbar =findViewById(R.id.main_appbar_toolbar);
+        setSupportActionBar(mainToolbar);
+        getSupportActionBar().setTitle("LockDownSecurity");
     }
 
+     /**
+      * Checks if user is signed in (non-null) and update UI accordingly.
+      * Get the current Firebase user and store it on currentUser
+      * if currentUser is null then open the activity HomePage
+      *
+      *  Code from Tools->Firebase->Authentication-> (3)
+      *  "Check current auth state"
+      */
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser == null){
+            sendToStart();
+        }
+    }
+
+    private void sendToStart() {
+            Intent homePageIntent = new Intent(MainActivity.this,HomePage.class);
+            startActivity(homePageIntent);
+            finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.logout_button){
+            FirebaseAuth.getInstance().signOut();
+            sendToStart();
+        }
+
+        return true;
+    }
 }
