@@ -4,20 +4,20 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 public class MessagingActivity extends AppCompatActivity {
     String TAG = MessagingActivity.class.getSimpleName();
 
-    private final String COLLECTION_KEY = "conversations";
+    private final String COLLECTION_KEY = "conversationThread";
     private final String DOCUMENT_KEY = "chat1";
     private final String MESSAGES_KEY = "messages";
     private final String FROM_KEY = "from";
@@ -66,7 +66,8 @@ public class MessagingActivity extends AppCompatActivity {
 
     private void initMessageUpdateListener() {
         // listen to realtime changes in multiple docs
-        conversation.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        conversation.orderBy(TIMESTAMP_KEY, Query.Direction.ASCENDING)
+        .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot values, @Nullable FirebaseFirestoreException e) {
                 if (e != null) {
